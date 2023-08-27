@@ -1,5 +1,5 @@
-# Step-by-step guide to build the demo flow 'WorkingWithXPath' yourself
-#### [By Gabriel Koolman]
+# Step-by-step guide to build the demo flow 'WorkingWithXPath'
+#### [By Gabriel Koolman](https://www.linkedin.com/in/gabrielkoolman/)
 
 ### Introduction
 Sometimes, when working with REST APIs, the response can be an array of objects in JSON format. To manipulate this JSON data, you can use actions such as the 'Select' action and 'Filter Array' action, or simply utilize expressions. However, this approach can be very challenging, especially if the JSON structure is complex or deeply nested. This is where converting the JSON data into XML becomes a valuable approach. XML's hierarchical and standardized format can often be easier to navigate compared to JSON. Additionally, once your data is in XML format, you can employ XPath expressions to adeptly query and extract specific elements and attributes, offering a refined and versatile method to process the information. 
