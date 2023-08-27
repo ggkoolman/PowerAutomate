@@ -6,7 +6,11 @@ Sometimes, when working with REST APIs, the response can be an array of objects 
 
 In Power Automate, there's a handy expression **xml('value')** to aid this conversion. Here, **'value'** represents the string containing the JSON object you intend to convert. It's crucial to note that this JSON object should possess **only a single root property** and it mustn't be an array. If your JSON string contains double quotation marks, remember to use the backslash character **(\\)** to escape them, ensuring accurate conversion. We'll start by converting the JSON data to XML. Once in XML format, we'll use XPath expressions to query the data effectively. Finally we can revert the data back to its JSON format for subsequent use within the flow.
 
-Please note that Power Automate currently supports only **XPath version 1** out of the box. Given this, I'll be utilizing this approach in the following demo.
+The **xpath(xml, xpath expression)** expression in Power Automate requires two parameters:
+1) The XML on which to apply the XPath expression.
+2) The XPath expression, which is like a guide or path to find specific parts of the XML data.
+- The **xpath() expression** returns an XML node, nodeset or value as JSON from the provided XPath expression.
+- Please note that Power Automate currently supports only **XPath version 1** out of the box. Given this, I'll be utilizing this approach in the demo.
 
 ****Download****
 - **Sample JSON File**: [here](https://github.com/ggkoolman/PowerAutomate/blob/main/WorkingWithXPath/Sample%20data%20XPath%20demo.json)
