@@ -216,10 +216,9 @@ Next, insert the following expression:\
 26\. Add **'Compose'** action and name it **Return the last customer with preference category 'Starships'**
 
 Next, insert the following expression:\
-`@{json(xml(decodeBase64(first(xpath(outputs('Convert_JSON_to_XML'), '/root/customers[preferences/categories="Starships"][1]'))['$content'])))}`
+`json(xml(decodeBase64(first(xpath(outputs('Convert_JSON_to_XML'), '/root/customers[preferences/categories="Starships"][last()]'))['$content'])))`
 
 ![](https://ajeuwbhvhr.cloudimg.io/colony-recorder.s3.amazonaws.com/files/2023-08-22/0af1dd6a-95d0-40c3-941d-9f051ce11c84/user_cropped_screenshot.jpeg?tl_px=5,0&br_px=534,147&force_format=png&width=529)
-
 
 27\. Add **'Compose'** action and name it **Return the rating and text of reviews for a specific product**. In this case I'll filter on **Lightsaber** only.
 
