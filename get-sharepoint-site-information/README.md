@@ -2,7 +2,7 @@
 
 ## Summary
 
-This sample flow uses SharePoint REST API to collect site-related details including list names and GUIDs, sharepoint group names and IDs, names and email  addresses of site users, and lastly, all permission masks. These data will be mapped and send back to the user by email and presented in HTML tables.
+This sample flow calls SharePoint REST API to collect site-related details including list names and GUIDs, sharepoint group names and IDs, names and email  addresses of site users, and lastly, all permission masks. These data will be mapped and send back to the user by email and presented in HTML tables.
 
 ![preview01](assets/preview01.png)
 ![preview02](assets/preview02.png)
@@ -28,10 +28,6 @@ get-sharepoint-site-information | [Gabriel Koolman](https://www.linkedin.com/in/
 Version|Date|Comments
 -------|----|--------
 1.0|September 3, 2023|Initial release
-
-## Features
-
-This sample flow provides a lot of useful information about a SharePoint site. It includes details like the all list names and GUID, the group names and group IDs , the names and email addresses of all site users, and even the permission masks that control what users can do on the site.
 
 ## Minimal Path to Awesome
 
