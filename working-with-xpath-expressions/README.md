@@ -35,13 +35,6 @@ Version|Date|Comments
 -------|----|--------
 1.0|September 1, 2023|Initial release
 
-## Features
-
-This sample illustrates the following concepts:
-
-* Convert complex JSON structures to XML format
-* Apply various XPath expressions on the XML and return the results in JSON format
-
 ## Minimal Path to Awesome
 
 * [Download](solution/working-with-xpath-expressions.zip) the `.zip` from the `solution` folder
