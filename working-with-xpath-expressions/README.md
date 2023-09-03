@@ -33,7 +33,7 @@ working-with-xpath-expressions | [Gabriel Koolman](https://www.linkedin.com/in/g
 
 Version|Date|Comments
 -------|----|--------
-1.0|August 27, 2023|Initial release
+1.0|September 1, 2023|Initial release
 
 ## Features
 
