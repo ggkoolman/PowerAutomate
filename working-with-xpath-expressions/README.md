@@ -43,12 +43,12 @@ Version|Date|Comments
 
 ## Using the Source Code
 
-You can also use the [Power Apps CLI](https://docs.microsoft.com/powerapps/developer/data-platform/powerapps-cli) to pack the source code by following these steps::
+You can also use the [Power Platform CLI](https://docs.microsoft.com/powerapps/developer/data-platform/powerapps-cli) to pack the source code by following these steps::
 
 * Clone the repository to a local drive
 * Pack the source files back into a solution `.zip` file:
   ```bash
-  pac solution pack --zipfile pathtodestinationfile --folder pathtosourcefolder --processCanvasApps
+  pac solution pack --zipfile pathtodestinationfile --folder pathtosourcefolder 
   ```
   Making sure to replace `pathtosourcefolder` to point to the path to this sample's `sourcecode` folder, and `pathtodestinationfile` to point to the path of this solution's `.zip` file (located under the `solution` folder)
 * Within **Power Automate Studio**, import the `.zip` file using **My Flows** > **Import** > **Upload** within Microsoft Flow.
