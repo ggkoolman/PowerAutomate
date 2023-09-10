@@ -84,22 +84,22 @@ Your application runs as a background service or daemon without a signed-in user
 ![](https://ajeuwbhvhr.cloudimg.io/colony-recorder.s3.amazonaws.com/files/2023-09-10/5c60321e-c049-43d9-867a-6ed4c8ef0b16/ascreenshot.jpeg?tl_px=940,126&br_px=1800,607&force_format=png&width=860&wat_scale=76&wat=1&wat_opacity=1&wat_gravity=northwest&wat_url=https://colony-recorder.s3.amazonaws.com/images/watermarks/0EA5E9_standard.png&wat_pad=402,212)
 
 
-10\. Select "User.Read.All"
+10\. Select **"User.Read.All"**
 
 ![](https://ajeuwbhvhr.cloudimg.io/colony-recorder.s3.amazonaws.com/files/2023-09-10/79139495-15a2-45bc-9106-be027c9c0675/ascreenshot.jpeg?tl_px=670,450&br_px=1530,931&force_format=png&width=860&wat_scale=76&wat=1&wat_opacity=1&wat_gravity=northwest&wat_url=https://colony-recorder.s3.amazonaws.com/images/watermarks/0EA5E9_standard.png&wat_pad=402,261)
 
 
-11\. Select "Group.ReadWrite.All"
+11\. Select **"Group.ReadWrite.All"** and also **"GroupMember.ReadWrite.All"**
 
 ![](https://ajeuwbhvhr.cloudimg.io/colony-recorder.s3.amazonaws.com/files/2023-09-10/4198cba0-25f7-4c4e-bd8c-f00f44f603f3/ascreenshot.jpeg?tl_px=668,449&br_px=1528,930&force_format=png&width=860&wat_scale=76&wat=1&wat_opacity=1&wat_gravity=northwest&wat_url=https://colony-recorder.s3.amazonaws.com/images/watermarks/0EA5E9_standard.png&wat_pad=402,212)
 
 
-12\. Select "RoleManagement.ReadWrite.Directory"
+12\. Select **"RoleManagement.ReadWrite.Directory"**
 
 ![](https://ajeuwbhvhr.cloudimg.io/colony-recorder.s3.amazonaws.com/files/2023-09-10/477169bd-76d3-4557-aa33-67b8fc088136/ascreenshot.jpeg?tl_px=719,450&br_px=1579,931&force_format=png&width=860&wat_scale=76&wat=1&wat_opacity=1&wat_gravity=northwest&wat_url=https://colony-recorder.s3.amazonaws.com/images/watermarks/0EA5E9_standard.png&wat_pad=402,418)
 
 
-13\. Click "Grant admin consent for.."
+13\. Click **"Grant admin consent for.."**
 
 ![](https://ajeuwbhvhr.cloudimg.io/colony-recorder.s3.amazonaws.com/files/2023-09-10/c366f2e3-ec91-44bd-b266-e99fc309dcf8/user_cropped_screenshot.jpeg?tl_px=268,195&br_px=1128,676&force_format=png&width=860&wat_scale=76&wat=1&wat_opacity=1&wat_gravity=northwest&wat_url=https://colony-recorder.s3.amazonaws.com/images/watermarks/0EA5E9_standard.png&wat_pad=478,212)
 
