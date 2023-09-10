@@ -1,8 +1,8 @@
-# Get SharePoint Site Information
+# Security Group & M365 Group Requests Automation 
 
 ## Summary
 
-This sample flow calls SharePoint REST API to collect site-related details including list names and GUIDs, sharepoint group names and IDs, names and email  addresses of site users, and lastly, all permission masks. These data will be mapped and send back to the user by email and presented in HTML tables.
+This sample solution shows you how to automate security group and Microsoft 365 group requests using Power Automate, Microsoft Form and Microsoft Graph API with Application User permissions.
 
 ![preview01](assets/preview01.png)
 ![preview02](assets/preview02.png)
@@ -10,10 +10,10 @@ This sample flow calls SharePoint REST API to collect site-related details inclu
 ## Applies to
 
 * [Microsoft Power Automate](https://docs.microsoft.com/power-automate/)
-
+* [Microsoft Graph](https://learn.microsoft.com/en-us/graph/)
 ## Compatibility
 
-![Premium License](https://img.shields.io/badge/Premium%20License-Not%20Required-green.svg "Premium license not required")
+![Premium License](https://img.shields.io/badge/Premium%20License-Required-green.svg "Premium license not required")
 ![On-Premises Connectors](https://img.shields.io/badge/On--Premises%20Connectors-No-green.svg "Does not use on-premise connectors")
 ![Custom Connectors](https://img.shields.io/badge/Custom%20Connectors-Not%20Required-green.svg "Does not use custom connectors")
 
@@ -21,13 +21,13 @@ This sample flow calls SharePoint REST API to collect site-related details inclu
 
 Solution|Author(s)
 --------|---------
-get-sharepoint-site-information | [Gabriel Koolman](https://www.linkedin.com/in/gabrielkoolman/)
+group-requests-automation-graph | [Gabriel Koolman](https://www.linkedin.com/in/gabrielkoolman/)
 
 ## Version history
 
 Version|Date|Comments
 -------|----|--------
-1.0|September 3, 2023|Initial release
+1.0|September 10, 2023|Initial release
 
 ## Setup this solution
 
@@ -142,11 +142,25 @@ The "Value" is the client secret that you need to store.
 
 #### Now let's setup the Microsoft Form
 
+**First go to https://forms.office.com/ to create the form for the solution.**
 
+Next follow the steps as on the images and create the questions while mainting the same order. We'll adjust the form branching options at the end.
+![preview03](assets/Preview03.png)
+![preview04](assets/Preview04.png)
+![preview05](assets/Preview05.png)
 
-* [Download](solution/get-sharepoint-site-information.zip) the `.zip` from the `solution` folder
-* [Import](https://flow.microsoft.com/en-us/blog/import-export-bap-packages/) the `.zip` file using **My Flows** > **Import** > **Upload** within Microsoft Flow.
-* After downloading and importing the flow, proceed to open the flow and expand the **Compose** action named **'Settings'** and replace the **siteUrl** property with your own siteUrl.
+**Now edit the branching using this setup.**
+![preview01](assets/Preview01.png)
+![preview02](assets/Preview02.png)
+
+#### Now let's download and import the solution.
+* [Download](solution/group-request-automation-graph-api.zip) the `.zip` from the `solution` folder
+* Go to https://make.powerautomate.com/
+* [Import](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/import-update-export-solutions/) the `.zip` file using **Import solution** within Microsoft Power Automate Studio.
+
+* After downloading and importing the flow: 
+1) Open the trigger and the Get Response Details action, then select the form you created earlier. Using the environment variable 'FormID' is optional. It's best practice to use a datatype environment variable instead.
+2) Proceed to update the following actions: **Authentication, Get additional information about requestor, Response details and Admin email**. 
 
 ## Using the Source Code
 
@@ -158,7 +172,7 @@ You can also use the [Power Platform CLI](https://docs.microsoft.com/powerapps/d
   pac solution pack --zipfile pathtodestinationfile --folder pathtosourcefolder
   ```
   Making sure to replace `pathtosourcefolder` to point to the path to this sample's `sourcecode` folder, and `pathtodestinationfile` to point to the path of this solution's `.zip` file (located under the `solution` folder)
-* Within **Power Automate Studio**, import the `.zip` file using **My Flows** > **Import** > **Upload** within Microsoft Flow.
+* [Import](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/import-update-export-solutions/) the `.zip` file using **Import solution** within Microsoft Power Automate Studio.
 
 ## Disclaimer
 
