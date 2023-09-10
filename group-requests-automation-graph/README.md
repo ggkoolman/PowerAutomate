@@ -4,8 +4,9 @@
 
 This sample solution shows you how to automate security group and Microsoft 365 group requests using Power Automate, Microsoft Form and Microsoft Graph API with Application User permissions.
 
-![preview01](assets/Preview06.png)
-![preview02](assets/Preview07.png)
+![preview06](assets/Preview06.png)
+![preview07](assets/Preview07.png)
+![preview08](assets/Preview08.png)
 
 ## Applies to
 
