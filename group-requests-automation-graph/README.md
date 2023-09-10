@@ -154,7 +154,7 @@ Next follow the steps as on the images and create the questions while mainting t
 ![preview01](assets/Preview01.png)
 ![preview02](assets/Preview02.png)
 
-#### Now let's download and import the solution.
+## Now let's download and import the solution.
 * [Download](solution/group-request-automation-graph-api.zip) the `.zip` from the `solution` folder
 * Go to https://make.powerautomate.com/
 * [Import](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/import-update-export-solutions/) the `.zip` file using **Import solution** within Microsoft Power Automate Studio.
