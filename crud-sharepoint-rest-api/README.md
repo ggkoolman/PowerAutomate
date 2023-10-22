@@ -47,7 +47,7 @@ Version|Date|Comments
 * Using "CreateList" as a template, create a new SharePoint list and name it "TargetList"
 * [Download](solution/crud-sharepoint-rest-api.zip) the `.zip` file from the `solution` folder
 * Import the solution by going to the [Power Automate Portal](https://make.powerautomate.com) and clicking on **"Import Solution"**
-* Configure the (4) environment variables
+* Configure the (4) environment variables (the SharePoint site, CreateList, TargetList and JSON settings)
 * Turn on the flow
 
 ## Using the Source Code
@@ -65,18 +65,3 @@ You can also use the [Power Platform CLI](https://docs.microsoft.com/powerapps/d
 ## Disclaimer
 
 **THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
-
-## Help
-
-If you encounter any issues while using this sample, [create a new issue](https://github.com/pnp/powerautomate-samples/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2Ctype%3Abug-suspected&template=bug-report.yml&sample=YOURSAMPLENAME&authors=@YOURGITHUBUSERNAME&title=YOURSAMPLENAME%20-%20).
-
-For questions regarding this sample, [create a new question](https://github.com/pnp/powerautomate-samples/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2Ctype%3Abug-suspected&template=question.yml&sample=YOURSAMPLENAME&authors=@YOURGITHUBUSERNAME&title=YOURSAMPLENAME%20-%20).
-
-Finally, if you have an idea for improvement, [make a suggestion](https://github.com/pnp/powerautomate-samples/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2Ctype%3Abug-suspected&template=suggestion.yml&sample=YOURSAMPLENAME&authors=@YOURGITHUBUSERNAME&title=YOURSAMPLENAME%20-%20).
-
-## For more information
-
-- [Create your first flow](https://docs.microsoft.com/en-us/power-automate/getting-started#create-your-first-flow)
-- [Microsoft Power Automate documentation](https://docs.microsoft.com/en-us/power-automate/)
-
-<img src="https://telemetry.sharepointpnp.com/powerautomate-samples/samples/readme-template" />
