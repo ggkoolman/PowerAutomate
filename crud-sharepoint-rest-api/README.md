@@ -2,7 +2,7 @@
 
 ## Summary
 
-This sample solutions covers CRUD operations when using SharePoint REST API inside Power Automate.
+This sample solution covers CRUD operations when using SharePoint REST API inside Power Automate.
 
 ## Flows
 
