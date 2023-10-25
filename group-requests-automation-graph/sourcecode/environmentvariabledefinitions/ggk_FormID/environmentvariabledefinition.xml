@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="ggk_FormID">
+  <description default="Fill the Form ID here. Go to the form and look at the url: https://forms.office.com/Pages/ResponseDetailPage.aspx?id=&lt;This is your Form ID&gt;&amp;rid=1&amp;">
+    <label description="Fill the Form ID here. Go to the form and look at the url: https://forms.office.com/Pages/ResponseDetailPage.aspx?id=&lt;This is your Form ID&gt;&amp;rid=1&amp;" languagecode="1033" />
+  </description>
+  <displayname default="FormID">
+    <label description="FormID" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>
