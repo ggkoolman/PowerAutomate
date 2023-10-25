@@ -1,10 +1,10 @@
 {
   "properties": {
     "connectionReferences": {
-      "shared_sharepointonline_1": {
+      "shared_sharepointonline": {
         "runtimeSource": "embedded",
         "connection": {
-          "connectionReferenceLogicalName": "ggk_SharePointDemo"
+          "connectionReferenceLogicalName": "ggk_SharePoint"
         },
         "api": {
           "name": "shared_sharepointonline"
@@ -39,7 +39,7 @@
         },
         "SPlistSettings (ggk_SPlistSettings)": {
           "defaultValue": {
-            "siteUrl": "https://shocoitsolutions.sharepoint.com/sites/SharePoint-REST-API",
+            "siteUrl": "insert your sharepoint site url here",
             "createList": {
               "listName": "CreateList",
               "spData": "SP.Data.CreateListListItem"
@@ -47,13 +47,7 @@
             "targetList": {
               "listName": "TargetList",
               "spData": "SP.Data.TargetListListItem"
-            },
-            "ownersPrincipleId": 3,
-            "membersPrincipleId": 5,
-            "visitorPrincipleId": 4,
-            "ownersPermissionMask": 1073741829,
-            "membersPermissionMask": 1073741827,
-            "visitorPermissionMask": 1073741826
+            }
           },
           "type": "Object",
           "metadata": {
@@ -74,7 +68,7 @@
           "type": "OpenApiConnection",
           "inputs": {
             "host": {
-              "connectionName": "shared_sharepointonline_1",
+              "connectionName": "shared_sharepointonline",
               "operationId": "GetOnNewItems",
               "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
             },
@@ -98,7 +92,7 @@
               "type": "OpenApiConnection",
               "inputs": {
                 "host": {
-                  "connectionName": "shared_sharepointonline_1",
+                  "connectionName": "shared_sharepointonline",
                   "operationId": "HttpRequest",
                   "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
                 },
@@ -131,7 +125,7 @@
               },
               "description": "Converting this JSON structure to XML enables XPath expressions for data navigation. Although XPath can be applied directly from the preceding action, including a root object here provides better organization and clarity."
             },
-            "Condition_-_Check_if_Date_and_DateAndTime_fields_are_null": {
+            "Condition_-_Check_if_Date_or_DateAndTime_fields_are_null": {
               "actions": {
                 "Send_an_HTTP_request_to_SharePoint_-_Create_list_item_in_TargetList": {
                   "runAfter": {},
@@ -141,7 +135,7 @@
                   "type": "OpenApiConnection",
                   "inputs": {
                     "host": {
-                      "connectionName": "shared_sharepointonline_1",
+                      "connectionName": "shared_sharepointonline",
                       "operationId": "HttpRequest",
                       "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
                     },
@@ -171,7 +165,7 @@
                   "type": "OpenApiConnection",
                   "inputs": {
                     "host": {
-                      "connectionName": "shared_sharepointonline_1",
+                      "connectionName": "shared_sharepointonline",
                       "operationId": "HttpRequest",
                       "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
                     },
@@ -205,7 +199,7 @@
                     "type": "OpenApiConnection",
                     "inputs": {
                       "host": {
-                        "connectionName": "shared_sharepointonline_1",
+                        "connectionName": "shared_sharepointonline",
                         "operationId": "HttpRequest",
                         "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
                       },
@@ -245,7 +239,7 @@
                 "operationMetadataId": "98729e01-b945-422b-81c7-ca029885fcf7"
               },
               "type": "If",
-              "description": " If Date and DateAndTime fields contain null values, they cannot be created in the TargetList using SharePoint REST API. This condition guides the workflow in the right direction."
+              "description": " If Date or DateAndTime fields contain null values, they cannot be created in the TargetList using SharePoint REST API. This condition guides the workflow in the right direction."
             }
           },
           "runAfter": {
@@ -308,13 +302,13 @@
                     "type": "OpenApiConnection",
                     "inputs": {
                       "host": {
-                        "connectionName": "shared_sharepointonline_1",
+                        "connectionName": "shared_sharepointonline",
                         "operationId": "HttpRequest",
                         "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
                       },
                       "parameters": {
                         "dataset": "@parameters('SPsite (ggk_SPsite)')",
-                        "parameters/method": "POST",
+                        "parameters/method": "DELETE",
                         "parameters/uri": " _api/web/lists/getbytitle('@{variables('Settings')['targetList']?['listName']}')/items(@{body('Send_an_HTTP_request_to_SharePoint_-_Create_list_item_in_TargetList')?['d']?['ID']})",
                         "parameters/headers": {
                           "accept": "application/json;odata=verbose",
@@ -348,7 +342,7 @@
               "type": "OpenApiConnection",
               "inputs": {
                 "host": {
-                  "connectionName": "shared_sharepointonline_1",
+                  "connectionName": "shared_sharepointonline",
                   "operationId": "HttpRequest",
                   "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
                 },

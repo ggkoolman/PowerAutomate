@@ -12,8 +12,8 @@
   <CustomControls />
   <EntityDataProviders />
   <connectionreferences>
-    <connectionreference connectionreferencelogicalname="ggk_SharePointDemo">
-      <connectionreferencedisplayname>SharePoint Demo</connectionreferencedisplayname>
+    <connectionreference connectionreferencelogicalname="ggk_SharePoint">
+      <connectionreferencedisplayname>SharePoint</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_sharepointonline</connectorid>
       <iscustomizable>1</iscustomizable>
       <statecode>0</statecode>
