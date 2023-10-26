@@ -2,7 +2,7 @@
 
 ## Summary
 
-This sample solution covers CRUD operations when using SharePoint REST API inside Power Automate.
+This sample solution covers CRUD operations when using SharePoint REST API inside Power Automate. It is intended to serve as a valuable reference for interacting with the SharePoint REST API within Power Automate.
 
 ## Flows
 
@@ -12,11 +12,12 @@ This sample solution covers CRUD operations when using SharePoint REST API insid
 #### create-item-in-another-list
 This flow illustrates the process of creating a new list item in a secondary list (Target List) from a source list (CreateList) using the 'Send an HTTP request to SharePoint' action in Power Automate. It covers commonly used fields including: Content Type, Date, Date and Time, Hyperlink, Multi-select Choice, Multi-select People Picker, Number, Single Choice, Single Line of Text, Single People Picker, and Yes/No. Additionally, this flow can handle null values from these fields efficiently.
 
-This sample workflow is intended to serve as a valuable reference for interacting with the SharePoint REST API within Power Automate.
-
 ![preview01](assets/preview01.png)
 
-***update-item-in-another-list (coming soon)***
+#### update-item-in-another-list 
+This flow illustrates the process of updating an existing list item in a secondary list (Target List) from a source list (CreateList) using the 'Send an HTTP request to SharePoint' action in Power Automate. It covers commonly used fields including: Content Type, Date, Date and Time, Hyperlink, Multi-select Choice, Multi-select People Picker, Number, Single Choice, Single Line of Text, Single People Picker, and Yes/No. Additionally, this flow can handle null values from these fields efficiently.
+
+![preview02](assets/preview02.png)
 
 ## Applies to
 
