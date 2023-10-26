@@ -1,0 +1,260 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ggk_SharePoint"
+        },
+        "api": {
+          "name": "shared_sharepointonline"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "SPsite (ggk_SPsite)": {
+          "defaultValue": "https://shocoitsolutions.sharepoint.com/sites/SharePoint-REST-API",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ggk_SPsite"
+          }
+        },
+        "SPcreateList (ggk_SPcreateList)": {
+          "defaultValue": "3127e441-45e2-4ccb-800d-573c57f91c45",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ggk_SPcreateList"
+          }
+        },
+        "SPlistSettings (ggk_SPlistSettings)": {
+          "defaultValue": {
+            "siteUrl": "https://shocoitsolutions.sharepoint.com/sites/SharePoint-REST-API",
+            "createList": {
+              "listName": "CreateList",
+              "spData": "SP.Data.CreateListListItem"
+            },
+            "targetList": {
+              "listName": "TargetList",
+              "spData": "SP.Data.TargetListListItem"
+            }
+          },
+          "type": "Object",
+          "metadata": {
+            "schemaName": "ggk_SPlistSettings"
+          }
+        }
+      },
+      "triggers": {
+        "When_an_item_or_a_file_is_modified": {
+          "recurrence": {
+            "interval": 1,
+            "frequency": "Minute"
+          },
+          "splitOn": "@triggerOutputs()?['body/value']",
+          "metadata": {
+            "operationMetadataId": "5491c2ef-2d87-412d-986e-766f74037fab"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_sharepointonline",
+              "operationId": "GetOnChangedItems",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+            },
+            "parameters": {
+              "dataset": "@parameters('SPsite (ggk_SPsite)')",
+              "table": "@parameters('SPcreateList (ggk_SPcreateList)')"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Try": {
+          "actions": {
+            "Send_an_HTTP_request_to_SharePoint_-_Get_additional_info": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "5d7ea9ed-ed7c-40f3-8ad2-78d35a8c883f"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_sharepointonline",
+                  "operationId": "HttpRequest",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                },
+                "parameters": {
+                  "dataset": "@parameters('SPsite (ggk_SPsite)')",
+                  "parameters/method": "GET",
+                  "parameters/uri": "_api/web/lists/getbytitle('@{variables('Settings')['createList']?['listName']}')/items(@{triggerOutputs()?['body/ID']})?$select=*,MultipleUsers/Id,MultipleUsers/Title, MultipleUsers/EMail, MultipleUsers/Name, SingleUser/Name&$expand=MultipleUsers, SingleUser",
+                  "parameters/headers": {
+                    "accept": "application/json;odata=verbose"
+                  }
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "description": "Here we perform 'Get item'. The wildcard symbol '*', selects all columns. For the 'MultipleUsers' lookup field, properties are selected first, followed by the use of '$expand' to obtain the additional properties associated with this field."
+            },
+            "Send_an_HTTP_request_to_SharePoint_-_Get_item_in_TargetList": {
+              "runAfter": {
+                "Select_-_Map_MultipleUsers": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5d7ea9ed-ed7c-40f3-8ad2-78d35a8c883f"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_sharepointonline",
+                  "operationId": "HttpRequest",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                },
+                "parameters": {
+                  "dataset": "@parameters('SPsite (ggk_SPsite)')",
+                  "parameters/method": "GET",
+                  "parameters/uri": "_api/web/lists/getbytitle('@{variables('Settings')['targetList']?['listName']}')/items?$filter=Title eq '@{replace(triggerOutputs()?['body/Title'], '''', '''''')}'&$select=ID, Title",
+                  "parameters/headers": {
+                    "accept": "application/json;odata=verbose"
+                  }
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "description": "Here we perform 'Get item'. The wildcard symbol '*', selects all columns. For the 'MultipleUsers' lookup field, properties are selected first, followed by the use of '$expand' to obtain the additional properties associated with this field."
+            },
+            "Condition_-_Check_if_item_exist_in_TargetList": {
+              "actions": {},
+              "runAfter": {
+                "Send_an_HTTP_request_to_SharePoint_-_Get_item_in_TargetList": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Send_an_HTTP_request_to_SharePoint_-_Update_list_item_in_TargetList": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "5d7ea9ed-ed7c-40f3-8ad2-78d35a8c883f"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_sharepointonline",
+                        "operationId": "HttpRequest",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                      },
+                      "parameters": {
+                        "dataset": "@parameters('SPsite (ggk_SPsite)')",
+                        "parameters/method": "POST",
+                        "parameters/uri": "_api/web/lists/getbytitle('@{variables('Settings')['targetList']?['listName']}')/items(@{first(body('Send_an_HTTP_request_to_SharePoint_-_Get_item_in_TargetList')?['d']?['results'])?['ID']})/validateUpdateListItem",
+                        "parameters/headers": {
+                          "accept": "application/json;odata=verbose",
+                          "content-type": "application/json;odata=verbose"
+                        },
+                        "parameters/body": "{\n  \"formValues\": [\n    {\n      \"FieldName\": \"Date\",\n      \"FieldValue\": \"@{if(empty(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['Date']), null, convertFromUtc(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['Date'], 'W. Europe Standard Time', 'M/dd/yyyy'))}\"\n    },\n    {\n      \"FieldName\": \"DateAndTime\",\n      \"FieldValue\": \"@{if(empty(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['DateAndTime']), null, convertFromUtc(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['DateAndTime'], 'W. Europe Standard Time', 'M/dd/yyyy HH:mm'))}\"\n    },\n    {\n      \"FieldName\": \"Title\",\n      \"FieldValue\": \"@{triggerOutputs()?['body/Title']}\"\n    },\n    {\n      \"FieldName\": \"Number\",\n      \"FieldValue\": \"@{coalesce(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['Number'], 0)}\"\n    },\n    {\n      \"FieldName\": \"SingleUser\",\n      \"FieldValue\": \"@{if(empty(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['SingleUser']?['Name']), null, concat('[{''Key'':''', body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['SingleUser']?['Name'], '''}]'))}\"\n    },\n    {\n      \"FieldName\": \"MultipleUsers\",\n      \"FieldValue\": \"@{replace(string(body('Select_-_Map_MultipleUsers')),'\"', '')}\"\n    },\n    {\n      \"FieldName\": \"Hyperlink\",\n      \"FieldValue\": \"@{if(empty(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['Hyperlink']), null, concat(coalesce(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['Hyperlink']?['Url'], ''), ', ', coalesce(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['Hyperlink']?['Description'], '')))}\"\n    },\n    {\n      \"FieldName\": \"YesNo\",\n      \"FieldValue\": \"@{coalesce(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['YesNo'], 'False')}\"\n    },\n    {\n      \"FieldName\": \"Choice\",\n      \"FieldValue\": \"@{coalesce(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['Choice'], null)}\"\n    },\n    {\n      \"FieldName\": \"MultipleChoice\",\n      \"FieldValue\": \"@{if(empty(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['MultipleChoice']), string(';#'), replace(replace(replace(replace(string(body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['MultipleChoice']['results']), '[', ''), ']', ''), ',', ';#'), '\"', ''))}\"\n    },\n    {\n      \"FieldName\": \"ContentTypeId\",\n      \"FieldValue\": \"@{body('Send_an_HTTP_request_to_SharePoint_-_Get_additional_info')?['d']?['ContentTypeId']}\"\n    }\n  ],\n  \"bNewDocumentUpdate\": false\n}\n"
+                      },
+                      "authentication": "@parameters('$authentication')"
+                    },
+                    "description": "Modify \"bNewDocumentUpdate\" to \"true\" if you do not want this update action to create a new version on SP for the updated item."
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@empty(body('Send_an_HTTP_request_to_SharePoint_-_Get_item_in_TargetList')?['d']?['results'])",
+                  "@true"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "ffe00dd6-a355-4d59-91f4-8c855c01ed03"
+              },
+              "type": "If"
+            },
+            "Select_-_Map_MultipleUsers": {
+              "runAfter": {
+                "Send_an_HTTP_request_to_SharePoint_-_Get_additional_info": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "2880f1f0-cef8-4a75-8dd9-8e11545a721f"
+              },
+              "type": "Select",
+              "inputs": {
+                "from": "@triggerOutputs()?['body/MultipleUsers']",
+                "select": {
+                  "'Key'": "'@{item()?['Claims']}'"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable_-_Settings": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4f8a6002-b5ee-4e80-83c5-494e65500d2c"
+          },
+          "type": "Scope"
+        },
+        "Initialize_variable_-_Settings": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "89c7bf76-8b24-49ba-a09f-024dbd0f6628"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Settings",
+                "type": "object",
+                "value": "@parameters('SPlistSettings (ggk_SPlistSettings)')"
+              }
+            ]
+          },
+          "description": "The value of the environment variable 'SPlistSettings' is stored within this object variable, as 'SPlistSettings' is of JSON data type. This allows for referencing this variable in later actions using the variables() expression."
+        },
+        "Catch": {
+          "actions": {
+            "Cancel_workflow": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "71f303a9-a878-4d40-a751-9aabde2d882b"
+              },
+              "type": "Terminate",
+              "inputs": {
+                "runStatus": "Cancelled"
+              }
+            }
+          },
+          "runAfter": {
+            "Try": [
+              "TimedOut",
+              "Failed"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b77d3fad-2052-4043-b9e6-1dcbcb435579"
+          },
+          "type": "Scope"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}
